@@ -21,3 +21,12 @@ to gain full access to the 2.7Pi available on your testnet.
 ## Notes
 
 - If you want to start Compass again after stopping it make sure to remove the `-bootstrap` line from `docker-compose.yml` before starting again.
+- You need enough RAM to run this setup, at least 4GB of free RAM is recommended.
+
+## Outstanding tasks
+
+ - [x] Run a private tangle with a single `docker-compose up` command
+ - [ ] Implement a way to prevent having to manually remove the `-bootstrap` flag after re-launch
+ - [ ] Use the latest Docker image of Compass instead of a fixed release
+ - [ ] Optional: build a nice wrapper around it with Docker/Docker-Compose included for even easier setup
+ - [ ] Optional: include additional tools like a tangle explorer/visualizer/monitor

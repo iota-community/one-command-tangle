@@ -1,21 +1,19 @@
 One-command private test Tangle
 ================================
 
-This repository allows you to set up your own IOTA network using a single command.
+This repository allows you to set up your own IOTA network using a single command. When you run this command, you'll have your own IOTA network and 2.7Pi of IOTA tokens to use.
 
-This network consists of one [IRI node](https://docs.iota.works/docs/iri/0.1/introduction/overview) and an instance of a Coordinator ([Compass](https://docs.iota.works/docs/compass/0.1/introduction/overview)).
+The network consists of one [IRI node](https://docs.iota.works/docs/iri/0.1/introduction/overview) and an instance of [Compass](https://docs.iota.works/docs/compass/0.1/introduction/overview).
 
 Compass uses a pre-built [Merkle tree](https://docs.iota.works/docs/the-tangle/0.1/concepts/the-coordinator#milestones) (in the `layers` directory) with a depth of 20. This Merkle tree is large enough for Compass to send milestones for over a year at 30-second intervals. 
 
-## Warning
-
-The purpose of this repository is to allow you to quickly set up a test IOTA network. To do so, this repository uses a public Merkle tree. As a result, you should use this repository only for testing. Do not expose this network to the internet!
+**Warning:** The purpose of this repository is to allow you to quickly set up a test IOTA network. To do so, this repository uses a public Merkle tree. As a result, you should use this repository only for testing. Do not expose this network to the Internet!
 
 ## Get started
 
 You need at least 4GB RAM to run this code.
 
-1. Make sure you have [`docker`, `docker-compose`](https://docs.docker.com/compose/install/) and [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) installed on your local machine
+1. Install [`docker`, `docker-compose`](https://docs.docker.com/compose/install/) and [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 2. Clone this repository
 3. In the `one-command-tangle` directory, execute the `docker-compose up` command. If you're using a Linux operating system, you may need to add `sudo` before this command.
  **Note:** Before running any Docker command, you need to run the Docker daemon on the host machine.
@@ -64,12 +62,10 @@ You need at least 4GB RAM to run this code.
      });
  }
  ```
-5. Set up the [IOTA Light Wallet](https://github.com/iotaledger/wallet/releases) to use your node at http://localhost:14265 with seed 
-to gain full access to the 2.7Pi available on your testnet.
+ 
+Instead of using the client libraries, you can configure the [IOTA Light Wallet](https://github.com/iotaledger/wallet/releases) to connect to your node at http://localhost:14265. Then, you can send and receive IOTA tokens on your network by interacting with the user interface.
 
-## Notes
-
-- If you want to start Compass again after stopping it make sure to remove the `-bootstrap` line from `docker-compose.yml` before starting again.
+**Note:** If you want to start Compass again after stopping it, remove the `-bootstrap` flag from `docker-compose.yml` file before running the command again.
 
 ## Outstanding tasks
 

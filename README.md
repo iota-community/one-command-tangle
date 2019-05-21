@@ -1,7 +1,7 @@
 One-command private test Tangle
 ================================
 
-This application allows you to set up your own IOTA network by using a single [Docker](https://www.docker.com/why-docker) command. When you run this command, you'll have your own IOTA test network and 2.7Pi of test IOTA tokens to use. These tokens will be stored on the first address of this seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
+This application allows you to set up your own IOTA network by using a single [Docker](https://www.docker.com/why-docker) command. When you run this command, you'll have your own IOTA test network and [2.7Pi](https://docs.iota.org/docs/iota-basics/0.1/references/units-of-iota-tokens) (the maximum amount) of test IOTA tokens to use. These tokens will be stored on the first address of this seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
 
 ![IOTA wallet for the test network](light-wallet-test-tangle.png)
 

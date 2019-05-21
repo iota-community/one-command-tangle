@@ -28,7 +28,7 @@ You need at least 4GB RAM to run this application.
  
  ![Compass and IRI node logs](cli.gif)
  
-**Note:** If you want to stop Compass and start it again, remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again.
+**Note:** If you want to stop Compass and start it again, press **Ctrl + C**, and remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again.
  
 ## 2. Interact with the network
 

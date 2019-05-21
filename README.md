@@ -23,9 +23,12 @@ You need at least 4GB RAM to run this application.
 
 1. Clone this repository
 2. In the `one-command-tangle` directory, execute the `docker-compose up` command. If you're using a Linux operating system, you may need to add `sudo` before this command.
- **Note:** If you want to start Compass again after stopping it, remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again
+
+ In the console, you should see that the IRI node is running and receiving milestones from Compass.
  
-![Compass and IRI node logs](cli.gif)
+ ![Compass and IRI node logs](cli.gif)
+ 
+**Note:** If you want to stop Compass and start it again, remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again.
  
 ## 2. Interact with the network
 

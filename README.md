@@ -11,7 +11,7 @@ The test network consists of one [IRI node](https://docs.iota.works/docs/iri/0.1
 
 Compass uses a pre-built [Merkle tree](https://docs.iota.works/docs/the-tangle/0.1/concepts/the-coordinator#milestones) (in the `layers` directory) with a depth of 20. This Merkle tree is large enough for Compass to send milestones for over a year at 30-second intervals. 
 
-**Warning:** The purpose of this application is to allow you to quickly set up a test IOTA network. To do so, this application uses a public Merkle tree. As a result, you should use this application only for testing. Do not expose this network to the Internet!
+**Warning:** The purpose of this application is to allow you to quickly set up a test IOTA network. To do so, this application uses a pre-calculated Merkle tree. As a result, you should use this application only for testing. Do not expose this network to the Internet!
 
 ## Dependencies
 

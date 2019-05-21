@@ -29,7 +29,9 @@ When the application is running, you can interact with the network through the I
 
 For a list of API endpoints see the [IOTA documentation](https://docs.iota.org/docs/iri/0.1/references/api-reference).
 
-For example, using the [JavaScript client library](https://docs.iota.org/docs/client-libraries/0.1/introduction/overview) with Node.js, you can do the following to get the total balance of the `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999` seed. If you've never used the IOTA client libraries before, we recommend completing [this tutorial](https://docs.iota.works/docs/getting-started/0.1/tutorials/send-a-zero-value-transaction-with-nodejs).
+### GetBalances
+
+For example, using the [JavaScript client library](https://docs.iota.org/docs/client-libraries/0.1/introduction/overview) with Node.js, you can call the [`getBalances`](https://docs.iota.org/docs/iri/0.1/references/api-reference#getbalances) endpoint to get the total balance of the `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999` seed. If you've never used the IOTA client libraries before, we recommend completing [this tutorial](https://docs.iota.works/docs/getting-started/0.1/tutorials/send-a-zero-value-transaction-with-nodejs).
 
  ```js
  var request = require('request');

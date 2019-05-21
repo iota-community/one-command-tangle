@@ -46,8 +46,6 @@ For example, using the [JavaScript client library](https://docs.iota.org/docs/cl
 
  function getBalance(address) {
 
-     console.log(address);
-
      var command = {
      'command': 'getBalances',
      'addresses': [
@@ -74,6 +72,21 @@ For example, using the [JavaScript client library](https://docs.iota.org/docs/cl
      });
  }
  ```
+ 
+ ### Response
+ 
+ ```json
+{
+ "balances": [
+  "2779530283277761"
+ ],
+ "references": [
+  "BDZPAONKWQTVCXFFO9GBTJ9GGWPRLITXZ9BMYALTCVWNOLFYPNHFJHPDWICRPGCZWUNDQHV9UDEXGW999"
+ ],
+ "milestoneIndex": 7,
+ "duration": 1
+}
+```
 
 If you want to send and receive transactions on the network through a user interface, you can configure the [IOTA Light Wallet](https://github.com/iotaledger/wallet/releases) to connect to your node at http://localhost:14265 and log in with your seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
 

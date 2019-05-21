@@ -3,6 +3,8 @@ One-command private test Tangle
 
 This repository allows you to set up your own IOTA network by using a single [Docker](https://www.docker.com/why-docker) command. When you run this command, you'll have your own IOTA test network and 2.7Pi of test IOTA tokens to use. These tokens will be stored on the first address of this seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
 
+![IOTA wallet for the test network](light-wallet-test-tangle.png)
+
 You can use this network to test your ideas and applications (without risking any monetary value) until it's ready for the IOTA Mainnet.
 
 The test network consists of one [IRI node](https://docs.iota.works/docs/iri/0.1/introduction/overview) and an instance of [Compass](https://docs.iota.works/docs/compass/0.1/introduction/overview). The IRI node waits to receive transactions, validates them, and keeps an up-to-date record of users' balances. Compass sends the IRI node zero-value transactions called milestones that reference other transactions. Any transaction that's referenced by a milestone is considered confirmed. At this point, the node updates any balances that were affected by the confirmed transaction.
@@ -22,6 +24,8 @@ You need at least 4GB RAM to run this application.
 1. Clone this repository
 2. In the `one-command-tangle` directory, execute the `docker-compose up` command. If you're using a Linux operating system, you may need to add `sudo` before this command.
  **Note:** If you want to start Compass again after stopping it, remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again
+ 
+![Compass and IRI node logs](cli.gif)
  
 ## 2. Interact with the network
 
@@ -91,6 +95,8 @@ For example, using the [JavaScript client library](https://docs.iota.org/docs/cl
 ```
 
 If you want to send and receive transactions on the network through a user interface, you can configure the [IOTA Light Wallet](https://github.com/iotaledger/wallet/releases) to connect to your node at http://localhost:14265 and log in with your seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
+
+![IOTA wallet for the test network](light-wallet-test-tangle.png)
 
 **Note:** When you first log into the IOTA Light Wallet, go to **RECEIVE** > **ATTACH TO TANGLE** to see your full balance.
 

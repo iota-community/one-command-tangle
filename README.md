@@ -99,7 +99,7 @@ For example, using the [JavaScript client library](https://docs.iota.org/docs/cl
 
 If you want to send and receive transactions on the network through a user interface, you can configure the [IOTA Light Wallet](https://github.com/iotaledger/wallet/releases) to connect to your node at http://localhost:14265 and log in with your seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
 
-To connect to your node, go to **Tools** > **Edit node configuration**, and enter the URL of your node (http://localhost:14265).
+To connect to your node, go to **Tools** > **Edit Node Configuration**, and enter the URL of your node (http://localhost:14265).
 
 ![IOTA wallet configuration](light-wallet-node-configuration.png)
 

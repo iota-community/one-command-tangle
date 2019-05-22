@@ -1,22 +1,45 @@
 One-command private test Tangle
 ================================
 
-This repository allows you to set up your own IOTA network by using a single command. When you run this command, you'll have your own IOTA network and 2.7Pi of test IOTA tokens to use.
+This application allows you to set up your own IOTA network by using a single [Docker](https://www.docker.com/why-docker) command. When you run this command, you'll have your own IOTA test network and [2.7Pi](https://docs.iota.org/docs/iota-basics/0.1/references/units-of-iota-tokens) (the maximum amount) of test IOTA tokens to use. These tokens will be stored on the first address of this seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
 
-The network consists of one [IRI node](https://docs.iota.works/docs/iri/0.1/introduction/overview) and an instance of [Compass](https://docs.iota.works/docs/compass/0.1/introduction/overview). Compass uses a pre-built [Merkle tree](https://docs.iota.works/docs/the-tangle/0.1/concepts/the-coordinator#milestones) (in the `layers` directory) with a depth of 20. This Merkle tree is large enough for Compass to send milestones for over a year at 30-second intervals. 
+![IOTA wallet for the test network](light-wallet-test-tangle.png)
 
-**Warning:** The purpose of this repository is to allow you to quickly set up a test IOTA network. To do so, this repository uses a public Merkle tree. As a result, you should use this repository only for testing. Do not expose this network to the Internet!
+You can use this network to test your ideas and applications without risking any monetary value.
 
-## Get started
+The test network consists of one [IRI node](https://docs.iota.works/docs/iri/0.1/introduction/overview) and an instance of a [Compass](https://docs.iota.works/docs/compass/0.1/introduction/overview). The IRI node receives transactions, validates them, and keeps an up-to-date record of users' balances. At regular intervals, Compass sends the IRI node zero-value transactions called [milestones](https://docs.iota.org/docs/the-tangle/0.1/concepts/the-coordinator#milestones) that reference other transactions. Any transaction that's referenced by a milestone is considered confirmed. At this point, the node updates any balances that were affected by the confirmed transaction.
 
-You need at least 4GB RAM to run this code.
+Compass uses a pre-built [Merkle tree](https://docs.iota.works/docs/the-tangle/0.1/concepts/the-coordinator#milestones) (in the `layers` directory) with a depth of 20. This Merkle tree is large enough for Compass to send milestones for over a year at 30-second intervals. 
 
-1. Install [`docker`, `docker-compose`](https://docs.docker.com/compose/install/) and [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-2. Clone this repository
-3. In the `one-command-tangle` directory, execute the `docker-compose up` command. If you're using a Linux operating system, you may need to add `sudo` before this command.
- **Note:** Before running any Docker command, you need to run the Docker daemon on the host machine.
-4. Interact with your private Tangle IRI node at http://localhost:14265
- For example, using Node.js, you can do the following to see your balance for the `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999` seed. If you've never used the IOTA client libraries before, we recommend completing [this tutorial](https://docs.iota.works/docs/getting-started/0.1/tutorials/send-a-zero-value-transaction-with-nodejs).
+**Warning:** The purpose of this application is to allow you to quickly set up a test IOTA network. To do so, this application uses a pre-calculated Merkle tree. As a result, you should use this application only for testing. Do not expose this network to the Internet!
+
+## Dependencies
+
+[Docker and Docker Compose](https://docs.docker.com/compose/install/).
+
+## 1. Run the application
+
+You need at least 4GB RAM to run this application.
+
+1. Clone this repository
+2. In the `one-command-tangle` directory, execute the `docker-compose up` command. If you're using a Linux operating system, you may need to add `sudo` before this command.
+
+ In the console, you should see that the IRI node is running and receiving milestones from Compass.
+ 
+ ![Compass and IRI node logs](cli.gif)
+ 
+**Note:** If you want to stop Compass and start it again, press **Ctrl + C**, and remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again.
+ 
+## 2. Interact with the network
+
+When the application is running, you can interact with the network through the IRI node's API port at the following address http://localhost:14265.
+
+For a list of API endpoints see the [IOTA documentation](https://docs.iota.org/docs/iri/0.1/references/api-reference).
+
+### GetBalances
+
+For example, using the [JavaScript client library](https://docs.iota.org/docs/client-libraries/0.1/introduction/overview) with Node.js, you can call the [`getBalances`](https://docs.iota.org/docs/iri/0.1/references/api-reference#getbalances) endpoint to get the total balance of the `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999` seed. If you've never used the IOTA client libraries before, we recommend completing [this tutorial](https://docs.iota.works/docs/getting-started/0.1/tutorials/send-a-zero-value-transaction-with-nodejs).
+
  ```js
  var request = require('request');
 
@@ -31,8 +54,6 @@ You need at least 4GB RAM to run this code.
  getBalance(address);
 
  function getBalance(address) {
-
-     console.log(address);
 
      var command = {
      'command': 'getBalances',
@@ -61,9 +82,28 @@ You need at least 4GB RAM to run this code.
  }
  ```
  
-Instead of using the client libraries, you can configure the [IOTA Light Wallet](https://github.com/iotaledger/wallet/releases) to connect to your node at http://localhost:14265. Then, you can send and receive IOTA tokens on your network by interacting with the user interface.
+ ### Response
+ 
+ ```json
+{
+ "balances": [
+  "2779530283277761"
+ ],
+ "references": [
+  "BDZPAONKWQTVCXFFO9GBTJ9GGWPRLITXZ9BMYALTCVWNOLFYPNHFJHPDWICRPGCZWUNDQHV9UDEXGW999"
+ ],
+ "milestoneIndex": 7,
+ "duration": 1
+}
+```
 
-**Note:** If you want to start Compass again after stopping it, remove the `-bootstrap` flag from `docker-compose.yml` file before running the command again.
+If you want to send and receive transactions on the network through a user interface, you can configure the [IOTA Light Wallet](https://github.com/iotaledger/wallet/releases) to connect to your node at http://localhost:14265 and log in with your seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
+
+To connect to your node, go to **Tools** > **Edit Node Configuration**, and enter the URL of your node (http://localhost:14265).
+
+![IOTA wallet configuration](light-wallet-node-configuration.png)
+
+**Note:** When you first log into the IOTA Light Wallet, go to **RECEIVE** > **ATTACH TO TANGLE** to see your full balance.
 
 ## Outstanding tasks
 

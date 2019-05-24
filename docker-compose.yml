@@ -30,6 +30,7 @@ services:
       - ./db:/iri/data
     command: >-
       --testnet 
+      --remote-limit-api ""
       --remote 
       --testnet-coordinator ZRMNUUBQHVRFRFBOQZYGAUBSTJSHDVIPXHUDA9VAXFTDSGGRILPVMYLVOLVCIEHLFMQKUOHUIUWILCXGD
       --testnet-coordinator-security-level 1

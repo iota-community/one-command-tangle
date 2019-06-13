@@ -13,7 +13,7 @@ Compass uses a pre-built [Merkle tree](https://docs.iota.works/docs/the-tangle/0
 
 **Warning:** The purpose of this application is to allow you to quickly set up a test IOTA network. To do so, this application uses a pre-calculated Merkle tree. As a result, you should use this application only for testing. Do not expose this network to the Internet!
 
-## Dependencies
+## Prerequisites
 
 [Docker and Docker Compose](https://docs.docker.com/compose/install/).
 

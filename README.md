@@ -24,7 +24,7 @@ You need at least 4GB of free RAM to run this application.
 1. Clone this repository
 
  ```bash
- https://github.com/iota-community/one-command-tangle.git
+ git clone https://github.com/iota-community/one-command-tangle.git
  ```
  
 2. In the `one-command-tangle` directory, execute the `docker-compose up` command. If you're using a Linux operating system, you may need to add `sudo` before this command.

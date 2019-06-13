@@ -19,16 +19,19 @@ Compass uses a pre-built [Merkle tree](https://docs.iota.works/docs/the-tangle/0
 
 ## 1. Run the application
 
-You need at least 4GB RAM to run this application.
+You need at least 4GB of free RAM to run this application.
 
 1. Clone this repository
+
+ ```bash
+ https://github.com/iota-community/one-command-tangle.git
+ ```
+ 
 2. In the `one-command-tangle` directory, execute the `docker-compose up` command. If you're using a Linux operating system, you may need to add `sudo` before this command.
 
  In the console, you should see that the IRI node is running and receiving milestones from Compass.
  
  ![Compass and IRI node logs](cli.gif)
- 
-**Note:** If you want to stop Compass and start it again, press **Ctrl + C**, and remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again.
  
 ## 2. Interact with the network
 
@@ -97,6 +100,8 @@ For example, using the [JavaScript client library](https://docs.iota.org/docs/cl
 }
 ```
 
+## 3. Connect to the network through a wallet
+
 If you want to send and receive transactions on the network through a user interface, you can configure the [IOTA Light Wallet](https://github.com/iotaledger/wallet/releases) to connect to your node at http://localhost:14265 and log in with your seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
 
 To connect to your node, go to **Tools** > **Edit Node Configuration**, and enter the URL of your node (http://localhost:14265).
@@ -104,6 +109,10 @@ To connect to your node, go to **Tools** > **Edit Node Configuration**, and ente
 ![IOTA wallet configuration](light-wallet-node-configuration.png)
 
 **Note:** When you first log into the IOTA Light Wallet, go to **RECEIVE** > **ATTACH TO TANGLE** to see your full balance.
+
+## Restart the network
+
+If you want to restart the network, press **Ctrl + C**, and remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again.
 
 ## Outstanding tasks
 

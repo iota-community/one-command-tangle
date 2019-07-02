@@ -31,6 +31,7 @@ services:
     command: >-
       --testnet true
       --remote true
+      --remote-limit-api ""
       --testnet-coordinator ZRMNUUBQHVRFRFBOQZYGAUBSTJSHDVIPXHUDA9VAXFTDSGGRILPVMYLVOLVCIEHLFMQKUOHUIUWILCXGD
       --testnet-coordinator-security-level 1
       --testnet-coordinator-signature-mode CURLP27

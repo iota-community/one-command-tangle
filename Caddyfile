@@ -1,0 +1,4 @@
+your-domain.com
+tls your@email.com
+
+proxy / localhost:14265

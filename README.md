@@ -126,6 +126,15 @@ If all went well you should be able to reach your node over SSL.
 
 **Note:** By enabling SSL and setting this up you are exposing your private testnet to the internet, if you do not want this you might be better off with the version without SSL.
 
+If you wish to use a fixed SSL certificate and key instead so you can keep it all offline simple replace the `tls your@email.com` line in the `Caddyfile` with `tls /etc/chain.pem /etckey.pem`
+Make sure to include both files in this folder if you wish to do this. You also need to add the volumes for both files to the `docker-compose-ssl.yml` file under `Volumes` in the `proxy` section:
+
+```
+      - ./chain.pem:/etc/chain.pem
+      - ./key.pem:/etc/key.pem
+```
+
+More about the available configuration options in the `Caddyfile` file can be found here: https://caddyserver.com/docs/tls
 
 ## Outstanding tasks
 

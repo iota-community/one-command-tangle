@@ -13,22 +13,25 @@ Compass uses a pre-built [Merkle tree](https://docs.iota.works/docs/the-tangle/0
 
 **Warning:** The purpose of this application is to allow you to quickly set up a test IOTA network. To do so, this application uses a pre-calculated Merkle tree. As a result, you should use this application only for testing. Do not expose this network to the Internet!
 
-## Dependencies
+## Prerequisites
 
 [Docker and Docker Compose](https://docs.docker.com/compose/install/).
 
 ## 1. Run the application
 
-You need at least 4GB RAM to run this application.
+You need at least 4GB of free RAM to run this application.
 
 1. Clone this repository
+
+ ```bash
+ git clone https://github.com/iota-community/one-command-tangle.git
+ ```
+ 
 2. In the `one-command-tangle` directory, execute the `docker-compose up` command. If you're using a Linux operating system, you may need to add `sudo` before this command.
 
  In the console, you should see that the IRI node is running and receiving milestones from Compass.
  
  ![Compass and IRI node logs](cli.gif)
- 
-**Note:** If you want to stop Compass and start it again, press **Ctrl + C**, and remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again.
  
 ## 2. Interact with the network
 
@@ -97,6 +100,8 @@ For example, using the [JavaScript client library](https://docs.iota.org/docs/cl
 }
 ```
 
+## 3. Connect to the network through a wallet
+
 If you want to send and receive transactions on the network through a user interface, you can configure the [IOTA Light Wallet](https://github.com/iotaledger/wallet/releases) to connect to your node at http://localhost:14265 and log in with your seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
 
 To connect to your node, go to **Tools** > **Edit Node Configuration**, and enter the URL of your node (http://localhost:14265).
@@ -105,29 +110,35 @@ To connect to your node, go to **Tools** > **Edit Node Configuration**, and ente
 
 **Note:** When you first log into the IOTA Light Wallet, go to **RECEIVE** > **ATTACH TO TANGLE** to see your full balance.
 
-## Optional: SSL Support en reverse proxy
+## Restart the network
 
-If you wish to have SSL support for your node we provide an additional `docker-compose` configuration file you can use.
-This will spin up a Caddy webserver instance for you including Let's Encrypt SSL certificates and a reverse proxy to your 
-IRI server. For this to work you need to do a couple of things first:
+If you want to restart the network, press **Ctrl + C**, and remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again.
 
- - Make sure the A-record in the DNS config of the domain name you want to use points to your public IP
- - Make sure the machine you are running the one-command-tangle on can be reached on that public IP (you might need port forwards)
- - Change the `your-domain.com` and `your@email.com` in the `Caddyfile` to your chosen domain and e-mail address (both required)
- - Make sure port 80 and 443 are available for binding on the machine you will run the one-command-tangle on.
+## Optional: SSL Support through a reverse proxy
 
-After this has been done just run the one-command-tangle with the following command:
+If you want SSL support for your node, you can use the `docker-compose-ssl` configuration file. This file starts a Caddy webserver instance that includes a Let's Encrypt SSL certificate and a reverse proxy to your 
+IRI node.
 
-```
-docker-compose -f docker-compose-ssl.yml up
-```
+1. Make sure the A-record in the DNS config of the domain name you want to use points to your public IP
+
+2. Make sure the machine you are running the one-command-tangle on can be reached on that public IP (you might need port forwards)
+
+3. Change the `your-domain.com` and `your@email.com` in the `Caddyfile` to your chosen domain and e-mail address (both required)
+
+4. Make sure port 80 and 443 are available for binding on the machine you will run the one-command-tangle on.
+
+5. Run the application with the `docker-compose-ssl` configuration file
+
+    ```
+    docker-compose -f docker-compose-ssl.yml up
+    ```
 
 If all went well you should be able to reach your node over SSL.
 
-**Note:** By enabling SSL and setting this up you are exposing your private testnet to the internet, if you do not want this you might be better off with the version without SSL.
+**Note:** This option exposes your private network to the Internet. If you don't want to do so, you should use the version without SSL support.
 
-If you wish to use a fixed SSL certificate and key instead so you can keep it all offline simple replace the `tls your@email.com` line in the `Caddyfile` with `tls /etc/chain.pem /etc/key.pem`
-Make sure to include both files in this folder if you wish to do this. You also need to add the volumes for both files to the `docker-compose-ssl.yml` file under `Volumes` in the `proxy` section:
+If you want to use a fixed SSL certificate and key instead so you can keep it all offline, replace the `tls your@email.com` line in the `Caddyfile` with `tls /etc/chain.pem /etc/key.pem`
+Make sure to include both files in this folder. You also need to add the volumes for both files to the `docker-compose-ssl.yml` file under `Volumes` in the `proxy` section:
 
 ```
       - ./chain.pem:/etc/chain.pem

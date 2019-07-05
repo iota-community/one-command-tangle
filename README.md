@@ -114,6 +114,39 @@ To connect to your node, go to **Tools** > **Edit Node Configuration**, and ente
 
 If you want to restart the network, press **Ctrl + C**, and remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again.
 
+## Optional: SSL Support through a reverse proxy
+
+If you want SSL support for your node, you can use the `docker-compose-ssl` configuration file. This file starts a Caddy webserver instance that includes a Let's Encrypt SSL certificate and a reverse proxy to your 
+IRI node.
+
+1. Make sure the A-record in the DNS config of the domain name you want to use points to your public IP
+
+2. Make sure the machine you are running the one-command-tangle on can be reached on that public IP (you might need port forwards)
+
+3. Change the `your-domain.com` and `your@email.com` in the `Caddyfile` to your chosen domain and e-mail address (both required)
+
+4. Make sure port 80 and 443 are available for binding on the machine you will run the one-command-tangle on.
+
+5. Run the application with the `docker-compose-ssl` configuration file
+
+    ```
+    docker-compose -f docker-compose-ssl.yml up
+    ```
+
+If all went well you should be able to reach your node over SSL.
+
+**Note:** This option exposes your private network to the Internet. If you don't want to do so, you should use the version without SSL support.
+
+If you want to use a fixed SSL certificate and key instead so you can keep it all offline, replace the `tls your@email.com` line in the `Caddyfile` with `tls /etc/chain.pem /etc/key.pem`
+Make sure to include both files in this folder. You also need to add the volumes for both files to the `docker-compose-ssl.yml` file under `Volumes` in the `proxy` section:
+
+```
+      - ./chain.pem:/etc/chain.pem
+      - ./key.pem:/etc/key.pem
+```
+
+More about the available configuration options in the `Caddyfile` file can be found here: https://caddyserver.com/docs/tls
+
 ## Outstanding tasks
 
  - [x] Run a private tangle with a single `docker-compose up` command

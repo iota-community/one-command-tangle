@@ -1,0 +1,19 @@
+{
+    "apiEndpoint": "http://localhost:4000",
+    "nodesMainnet": [
+        {
+            "provider": "http://localhost:14265",
+            "depth": 3,
+            "mwm": 9
+        }
+    ],
+    "nodesDevnet": [
+        {
+            "provider": "http://localhost:14265",
+            "depth": 3,
+            "mwm": 9
+        }
+    ],
+    "googleMapsKey": "GOOGLE-MAPS-KEY",
+    "googleAnalyticsId": ""
+}

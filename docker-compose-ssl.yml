@@ -1,45 +1,5 @@
 version: '3'
 services:
-  compass:
-    image: "iotacafe/compass:coordinator-8306ac7"
-    network_mode: host
-    depends_on: 
-      - 'iri'
-    volumes: 
-      - ./state:/state
-      - ./layers:/layers
-    command: coordinator_deploy.jar
-      -bootstrap
-      -broadcast
-      -layers /layers
-      -sigMode CURLP27
-      -powMode CURLP81
-      -mwm 9
-      -security 1
-      -seed MYSEEDHEREPLEASEREPLACEMEIMMEDIATELYWITHSOMETHINGSECURE99999999999999999999999999
-      -tick 30000
-      -host http://localhost:14265
-      -statePath /state/statefile
-  iri:
-    network_mode: host
-    image: "iotaledger/iri:latest"
-    ports:
-      - "14265:14265"
-    volumes: 
-      - ./snapshot.txt:/snapshot.txt
-      - ./db:/iri/data
-    command: >-
-      --testnet true
-      --remote true
-      --remote-limit-api ""
-      --testnet-coordinator ZRMNUUBQHVRFRFBOQZYGAUBSTJSHDVIPXHUDA9VAXFTDSGGRILPVMYLVOLVCIEHLFMQKUOHUIUWILCXGD
-      --testnet-coordinator-security-level 1
-      --testnet-coordinator-signature-mode CURLP27
-      --mwm 9 
-      --milestone-start 0
-      --milestone-keys 20
-      --snapshot /snapshot.txt
-      --max-depth 1000
   proxy:
     network_mode: host
     environment:
@@ -49,4 +9,4 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./Caddyfile:/etc/Caddyfile
+      - ./config/ssl/Caddyfile:/etc/Caddyfile

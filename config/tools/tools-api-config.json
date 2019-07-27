@@ -1,0 +1,19 @@
+{
+    "cmcApiKey": "CMC_API_KEY",
+    "fixerApiKey": "FIXER_API_KEY",
+    "dynamoDbConnection": {
+        "region": "AWS-REGION",
+        "accessKeyId": "AWS-ACCESS-KEY-ID",
+        "secretAccessKey": "AWS-SECRET-ACCESS-KEY",
+        "dbTablePrefix": "DATABASE-TABLE-PREFIX" 
+    },
+    "zmqMainNet": {                            
+        "endpoint": "tcp://localhost:5556"
+    },
+    "zmqDevNet": {                         
+        "endpoint": "tcp://localhost:5556"
+    },
+    "allowedDomains": [                    
+        "localhost"
+    ]
+}

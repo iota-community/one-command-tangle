@@ -3,13 +3,13 @@ One-command private test Tangle
 
 This application allows you to set up your own IOTA network by using a single [Docker](https://www.docker.com/why-docker) command. When you run this command, you'll have your own IOTA test network and [2.7Pi](https://docs.iota.org/docs/iota-basics/0.1/references/units-of-iota-tokens) (the maximum amount) of test IOTA tokens to use. These tokens will be stored on the first address of this seed: `SEED99999999999999999999999999999999999999999999999999999999999999999999999999999`.
 
-![IOTA wallet for the test network](light-wallet-test-tangle.png)
+![IOTA wallet for the test network](docs-static/light-wallet-test-tangle.png)
 
 You can use this network to test your ideas and applications without risking any monetary value.
 
 The test network consists of one [IRI node](https://docs.iota.works/docs/iri/0.1/introduction/overview) and an instance of a [Compass](https://docs.iota.works/docs/compass/0.1/introduction/overview). The IRI node receives transactions, validates them, and keeps an up-to-date record of users' balances. At regular intervals, Compass sends the IRI node zero-value transactions called [milestones](https://docs.iota.org/docs/the-tangle/0.1/concepts/the-coordinator#milestones) that reference other transactions. Any transaction that's referenced by a milestone is considered confirmed. At this point, the node updates any balances that were affected by the confirmed transaction.
 
-Compass uses a pre-built [Merkle tree](https://docs.iota.works/docs/the-tangle/0.1/concepts/the-coordinator#milestones) (in the `layers` directory) with a depth of 20. This Merkle tree is large enough for Compass to send milestones for over a year at 30-second intervals. 
+Compass uses a pre-built [Merkle tree](https://docs.iota.works/docs/the-tangle/0.1/concepts/the-coordinator#milestones) (in the `layers` directory) with a depth of 20. This Merkle tree is large enough for Compass to send milestones for over a year at 30-second intervals.
 
 **Warning:** The purpose of this application is to allow you to quickly set up a test IOTA network. To do so, this application uses a pre-calculated Merkle tree. As a result, you should use this application only for testing. Do not expose this network to the Internet!
 
@@ -25,11 +25,11 @@ You need at least 4GB RAM to run this application.
 2. In the `one-command-tangle` directory, execute the `docker-compose up` command. If you're using a Linux operating system, you may need to add `sudo` before this command.
 
  In the console, you should see that the IRI node is running and receiving milestones from Compass.
- 
- ![Compass and IRI node logs](cli.gif)
- 
-**Note:** If you want to stop Compass and start it again, press **Ctrl + C**, and remove the `-bootstrap` flag from the `docker-compose.yml` file before running the command again.
- 
+
+ ![Compass and IRI node logs](docs-static/cli.gif)
+
+**Note:** If you want to stop Compass and start it again, press **Ctrl + C**, and remove the `-bootstrap` extra flag from the `.env` configuration file before running the command again.
+
 ## 2. Interact with the network
 
 When the application is running, you can interact with the network through the IRI node's API port at the following address http://localhost:14265.
@@ -81,9 +81,9 @@ For example, using the [JavaScript client library](https://docs.iota.org/docs/cl
      });
  }
  ```
- 
+
  ### Response
- 
+
  ```json
 {
  "balances": [
@@ -101,14 +101,27 @@ If you want to send and receive transactions on the network through a user inter
 
 To connect to your node, go to **Tools** > **Edit Node Configuration**, and enter the URL of your node (http://localhost:14265).
 
-![IOTA wallet configuration](light-wallet-node-configuration.png)
+![IOTA wallet configuration](docs-static/light-wallet-node-configuration.png)
 
 **Note:** When you first log into the IOTA Light Wallet, go to **RECEIVE** > **ATTACH TO TANGLE** to see your full balance.
+
+## Optional: Enabling Tangle Utils
+
+The [Tangle Utils](https://utils.iota.org/) can be served for your own One Command Tangle as well. If you wish to utilize this feature you can run `docker-compose` with a additional flag to start the tangle utils with your private tangle.
+To do this run `docker-compose` like this:
+
+```
+docker-compose -f docker-compose.yml -f docker-compose-tools.yml up
+```
+
+The build process might take a while but as soon as the services are started you should be able to go to http://localhost:4001 to utilize the Tangle Utils.
+If you wish you can modify the configuration files for the Tangle Utils in the `config/tools` folder, for example to add API keys for additional functionality.
+
 
 ## Optional: SSL Support en reverse proxy
 
 If you wish to have SSL support for your node we provide an additional `docker-compose` configuration file you can use.
-This will spin up a Caddy webserver instance for you including Let's Encrypt SSL certificates and a reverse proxy to your 
+This will spin up a Caddy webserver instance for you including Let's Encrypt SSL certificates and a reverse proxy to your
 IRI server. For this to work you need to do a couple of things first:
 
  - Make sure the A-record in the DNS config of the domain name you want to use points to your public IP
@@ -119,7 +132,7 @@ IRI server. For this to work you need to do a couple of things first:
 After this has been done just run the one-command-tangle with the following command:
 
 ```
-docker-compose -f docker-compose-ssl.yml up
+docker-compose -f docker-compose.yml -f docker-compose-ssl.yml up
 ```
 
 If all went well you should be able to reach your node over SSL.
@@ -139,7 +152,9 @@ More about the available configuration options in the `Caddyfile` file can be fo
 ## Outstanding tasks
 
  - [x] Run a private tangle with a single `docker-compose up` command
+ - [x] Support SSL and Let's Encrypt
+ - [x] Include a tangle explorer
  - [ ] Implement a way to prevent having to manually remove the `-bootstrap` flag after re-launch
  - [ ] Use the latest Docker image of Compass instead of a fixed release
  - [ ] Optional: build a nice wrapper around it with Docker/Docker-Compose included for even easier setup
- - [ ] Optional: include additional tools like a tangle explorer/visualizer/monitor
+ - [ ] Optional: include additional tools like a tangle visualizer/monitor

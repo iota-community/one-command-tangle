@@ -9,33 +9,35 @@ services:
       - ./state:/state
       - ./layers:/layers
     command: coordinator_deploy.jar
-      -bootstrap
+      ${EXTRA_COMPASS_FLAGS}
       -broadcast
       -layers /layers
       -sigMode CURLP27
       -powMode CURLP81
-      -mwm 9
-      -security 1
+      -mwm ${MWM}
+      -security ${SECURITY_LEVEL}
       -seed MYSEEDHEREPLEASEREPLACEMEIMMEDIATELYWITHSOMETHINGSECURE99999999999999999999999999
-      -tick 30000
-      -host http://localhost:14265
+      -tick ${TICK_RATE}
+      -host http://localhost:${IRI_PORT}
       -statePath /state/statefile
   iri:
     network_mode: host
     image: "iotaledger/iri:latest"
     ports:
-      - "14265:14265"
+      - "${IRI_PORT}:${IRI_PORT}"
+      - "5556:5556"
     volumes: 
-      - ./snapshot.txt:/snapshot.txt
+      - ./config/snapshot.txt:/snapshot.txt
       - ./db:/iri/data
     command: >-
       --testnet true
       --remote true
+      --zmq-enable-tcp true
       --remote-limit-api ""
       --testnet-coordinator ZRMNUUBQHVRFRFBOQZYGAUBSTJSHDVIPXHUDA9VAXFTDSGGRILPVMYLVOLVCIEHLFMQKUOHUIUWILCXGD
-      --testnet-coordinator-security-level 1
+      --testnet-coordinator-security-level ${SECURITY_LEVEL}
       --testnet-coordinator-signature-mode CURLP27
-      --mwm 9 
+      --mwm ${MWM}
       --milestone-start 0
       --milestone-keys 20
       --snapshot /snapshot.txt

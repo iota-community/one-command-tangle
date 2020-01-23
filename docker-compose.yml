@@ -30,6 +30,7 @@ services:
       - ./config/snapshot.txt:/snapshot.txt
       - ./db:/iri/data
     command: >-
+      --port ${IRI_PORT}
       --testnet true
       --remote true
       --zmq-enable-tcp true

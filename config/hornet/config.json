@@ -1,0 +1,179 @@
+{
+  "useProfile": "auto",
+  "profiles": {
+    "custom": {
+      "caches": {
+        "requestQueue": {
+          "size": 100000
+        },
+        "approvers": {
+          "size": 100000,
+          "evictionSize": 1000
+        },
+        "bundles": {
+          "size": 20000,
+          "evictionSize": 1000
+        },
+        "milestones": {
+          "size": 1000,
+          "evictionSize": 100
+        },
+        "spentAddresses": {
+          "size": 5000,
+          "evictionSize": 1000
+        },
+        "transactions": {
+          "size": 50000,
+          "evictionSize": 1000
+        },
+        "incomingTransactionFilter": {
+          "size": 5000
+        },
+        "refsInvalidBundle": {
+          "size": 10000
+        }
+      },
+      "badger": {
+        "levelOneSize": 268435456,
+        "levelSizeMultiplier": 10,
+        "tableLoadingMode": 2,
+        "valueLogLoadingMode": 2,
+        "maxLevels": 7,
+        "maxTableSize": 67108864,
+        "numCompactors": 2,
+        "numLevelZeroTables": 5,
+        "numLevelZeroTablesStall": 10,
+        "numMemtables": 5,
+        "bloomFalsePositive": 0.01,
+        "blockSize": 4096,
+        "syncWrites": false,
+        "numVersionsToKeep": 1,
+        "compactLevel0OnClose": false,
+        "keepL0InMemory": false,
+        "verifyValueChecksum": false,
+        "maxCacheSize": 50000000,
+        "ZSTDCompressionLevel": 10,
+        "valueLogFileSize": 1073741823,
+        "valueLogMaxEntries": 1000000,
+        "valueThreshold": 32,
+        "withTruncate": false,
+        "logRotatesToFlush": 2,
+        "eventLogging": false
+      }
+    }
+  },
+  "api": {
+    "auth": {
+      "password": "",
+      "username": ""
+    },
+    "permitRemoteAccess": [
+      "getNodeInfo",
+      "getBalances",
+      "checkConsistency",
+      "getTransactionsToApprove",
+      "getInclusionStates",
+      "getNodeAPIConfiguration",
+      "wereAddressesSpentFrom",
+      "broadcastTransactions",
+      "findTransactions",
+      "storeTransactions",
+      "getTrytes"
+    ],
+    "host": "0.0.0.0",
+    "maxbodylength": 1000000,
+    "maxfindtransactions": 100000,
+    "maxgettrytes": 1000,
+    "maxrequestslist": 1000,
+    "port": 14265,
+    "remoteauth": ""
+  },
+  "compass": {
+    "loadLSMIAsLMI": false
+  },
+  "dashboard": {
+    "host": "127.0.0.1",
+    "port": 8081,
+    "dev": false,
+    "basic_auth": {
+      "enabled": false,
+      "username": "hornet",
+      "password": "hornet"
+    }
+  },
+  "db": {
+    "path": "mainnetdb"
+  },
+  "graph": {
+    "webrootPath": "IOTAtangle/webroot",
+    "socketiopath": "socket.io-client/dist/socket.io.js",
+    "domain": "",
+    "host": "127.0.0.1",
+    "port": 8083,
+    "networkName": "meets HORNET"
+  },
+  "pruning": {
+    "enabled": false
+  },
+  "localsnapshots": {
+    "enabled": false
+  },
+  "globalsnapshot": {
+    "load": false
+  },
+  "privatetangle": {
+    "ledgerstatepath": "snapshot.txt"
+  },
+  "milestones": {
+    "coordinator": "ZRMNUUBQHVRFRFBOQZYGAUBSTJSHDVIPXHUDA9VAXFTDSGGRILPVMYLVOLVCIEHLFMQKUOHUIUWILCXGD",
+    "coordinatorsecuritylevel": 1,
+    "numberofkeysinamilestone": 20
+  },
+  "monitor": {
+    "tanglemonitorpath": "tanglemonitor/frontend",
+    "domain": "",
+    "host": "127.0.0.1",
+    "port": 4434,
+    "apiPort": 4433
+  },
+  "mqtt": {
+    "config": "mqtt_config.json"
+  },
+  "network": {
+    "address": "0.0.0.0",
+    "preferIPv6": false,
+    "port": 15600,
+    "reconnectattemptintervalseconds": 60
+  },
+  "node": {
+    "disableplugins": [],
+    "enableplugins": []
+  },
+  "logger": {
+    "level": "info",
+    "disableCaller": true,
+    "encoding": "console",
+    "outputPaths": [
+      "stdout"
+    ]
+  },
+  "protocol": {
+    "mwm": 9
+  },
+  "spammer": {
+    "address": "HORNET99INTEGRATED99SPAMMER999999999999999999999999999999999999999999999999999999",
+    "depth": 3,
+    "message": "Spamming with HORNET tipselect",
+    "tag": "HORNET99INTEGRATED99SPAMMER",
+    "tpsratelimit": 0.1,
+    "workers": 1
+  },
+  "tipsel": {
+    "belowmaxdepthtransactionlimit": 20000,
+    "maxdepth": 15
+  },
+  "zmq": {
+    "host": "127.0.0.1",
+    "port": 5556
+  }
+}

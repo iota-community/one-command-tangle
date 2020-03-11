@@ -22,7 +22,7 @@ services:
       -statePath /state/statefile
   iri:
     network_mode: host
-    image: "iotaledger/iri:latest"
+    image: "iotaledger/iri:v1.8.2-RELEASE"
     ports:
       - "${IRI_PORT}:${IRI_PORT}"
       - "5556:5556"
